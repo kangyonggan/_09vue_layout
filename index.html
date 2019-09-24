@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>第九篇 使用Vue搭建后管系统的界面布局</title>
+    <meta charset="UTF-8">
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            height: 100%;
+        }
+
+        #app {
+            height: 100%;
+        }
+
+        .navbar {
+            height: 60px;
+            line-height: 60px;
+            border-bottom: 1px solid #d5d5d5;
+            padding: 0 20px;
+        }
+        .navbar .logout {
+            float: right;
+        }
+
+        .sidebar {
+            width: 18%;
+            float: left;
+            border-right: 1px solid #d5d5d5;
+            min-height: 90%;
+        }
+        .sidebar ul li {
+        }
+
+        .main {
+            width: 80%;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="navbar">
+        <span>后台管理系统</span>
+        <a class="logout" href="#">退出</a>
+    </div>
+    <div class="sidebar">
+        <ul>
+            <li v-for="menu in menus">
+                {{menu.name}}
+                <ul v-if="menu.children && menu.children.length">
+                    <li v-for="m in menu.children">
+                        {{m.name}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        欢迎使用后台管理系统
+    </div>
+</div>
+
+<script src="vue.min.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                menus: [{
+                    name: '系统',
+                    children: [{
+                        name: '用户管理'
+                    }, {
+                        name: '角色管理'
+                    }, {
+                        name: '菜单管理'
+                    }, {
+                        name: '字典管理'
+                    }]
+                }, {
+                    name: '网站',
+                    children: [{
+                        name: '文章管理'
+                    }]
+                }]
+            }
+        }
+    });
+</script>
+</body>
+</html>
